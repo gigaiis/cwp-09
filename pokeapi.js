@@ -36,3 +36,25 @@ Promise.any([
 	}).catch((err) => {
 	    console.log('Error load pokemons with ids: 1, 4, 7');
 	});
+
+
+Promise.props({
+    pokemons: axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=10`),
+    items: axios.get(`https://pokeapi.co/api/v2/item/?limit=10`),
+    locations: axios.get(`https://pokeapi.co/api/v2/location/?limit=10`)
+}).then((result) => {
+    console.log('Pokemons: ');
+    result["pokemons"].data.results.forEach((v) => {
+        console.log(v.name);
+    });
+    console.log('Items: ');
+    result['items'].data.results.forEach((v) => {
+        console.log(v.name);
+    });
+    console.log('Locations: ');
+    result['locations'].data.results.forEach((v) => {
+        console.log(v.name);
+    });
+}).catch((err) => {
+    console.log('Error load pokemons, items, locations');
+})
