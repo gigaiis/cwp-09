@@ -31,11 +31,11 @@ Promise.any([
     axios.get('https://pokeapi.co/api/v2/pokemon/1'),
     axios.get('https://pokeapi.co/api/v2/pokemon/4'),
     axios.get('https://pokeapi.co/api/v2/pokemon/7')
-	]).then((result) => {
-	    console.log(`[TASK 01_3] Имя: ${result.data.name}`);
-	}).catch((err) => {
-	    console.log('Error load pokemons with ids: 1, 4, 7');
-	});
+]).then((result) => {
+    console.log(`[TASK 01_3] Имя: ${result.data.name}`);
+}).catch((err) => {
+    console.log('Error load pokemons with ids: 1, 4, 7');
+});
 
 
 Promise.props({
@@ -57,4 +57,16 @@ Promise.props({
     });
 }).catch((err) => {
     console.log('Error load pokemons, items, locations');
+});
+
+
+Promise.map([1, 2, 3, 4], (i) => {
+    return axios.get(`http://pokeapi.co/api/v2/berry/${i}`)
+}).then((result) => {
+	console.log('Berrys: ');
+    result.forEach((val) => {
+       console.log(val.data.name);
+    })
+}).catch((err) => {
+    console.log('Error load berry');
 })
