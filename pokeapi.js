@@ -64,9 +64,9 @@ Promise.map([1, 2, 3, 4], (i) => {
     return axios.get(`http://pokeapi.co/api/v2/berry/${i}`)
 }).then((result) => {
 	console.log('Berrys: ');
-    result.forEach((val) => {
+    result.forEach((v) => {
        console.log(val.data.name);
     })
 }).catch((err) => {
-    console.log('Error load berry');
+    console.log(`Error load berry: ${err}`);
 })
